@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Final</string>
+    <string name="android">Android</string>
+    <string name="search_hint">Search</string>
+    <string name="product">Product</string>
+    <string name="more">more</string>
+    <string name="product_list">Product List</string>
+    <string name="cart">Cart</string>
+    <string name="detail">Detail</string>
+    <string name="product_name">Iphone 16 pro 128GB</string>
+    <string name="product_description">Description</string>
+    <string name="product_price">1069$</string>
+    <string name="product_detail">Product Detail</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="spec">Specification </string>
+    <string name="checkout">Checkout</string>
+    <string name="checkout_summary">Checkout Successfully!</string>
+</resources>
