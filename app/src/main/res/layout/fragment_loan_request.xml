@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+    <LinearLayout
+        android:id="@+id/llHeader"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <TextView
+            android:id="@+id/tvTotalPending"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total Pending:"
+            android:textSize="18sp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/light"
+            android:background="@drawable/button_round"
+            android:padding="16dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvTotalRejected"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total Rejected:"
+            android:textSize="18sp"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/light"
+            android:background="@drawable/button_round"
+            android:backgroundTint="@color/secondary"
+            android:padding="16dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewLoanRequests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        tools:listitem="@layout/list_request_loan"
+        app:layout_constraintTop_toBottomOf="@+id/llHeader"
+        />
+  <ImageView
+      android:id="@+id/tvRequestLoan"
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      android:background="@drawable/button_round"
+      android:backgroundTint="@color/dark"
+      android:textColor="@color/light"
+      android:gravity="center"
+      android:src="@drawable/ic_add"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:padding="16dp"
+      android:layout_marginBottom="32dp"
+      />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_margin="8dp"
+        />
+    <TextView
+        android:labelFor="@+id/editTextPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please enter your credentials to login"
+        android:layout_marginHorizontal="8dp"
+        android:textSize="18sp"
+        android:textColor="@color/text_primary_mid"
+        android:paddingBottom="60dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:labelFor="@+id/editTextEmail"
+        android:layout_marginHorizontal="8dp"
+        android:textSize="18sp"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Enter your email"
+        android:inputType="textEmailAddress"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="16dp"
+        android:padding="8dp"
+        android:background="@drawable/button_round"
+        android:enabled="false"
+/>
+    <TextView
+        android:labelFor="@+id/editTextPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:layout_marginHorizontal="8dp"
+        android:textSize="18sp"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Enter your password"
+        android:inputType="textEmailAddress"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="16dp"
+        android:padding="8dp"
+        android:background="@drawable/button_round"
+        android:enabled="false"
+        />
+    <TextView
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Login"
+        android:background="@drawable/button_round"
+        android:backgroundTint="@color/primary"
+        android:textStyle="bold"
+        android:textColor="@color/light"
+        android:textSize="22sp"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="60dp"
+        android:layout_marginTop="60dp"
+        />
+    <TextView
+        android:labelFor="@+id/editTextPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or"
+        android:layout_margin="8dp"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/text_primary_mid"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+
+        >
+        <TextView
+            android:labelFor="@+id/editTextPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/text_primary_mid"
+            android:text="Do not have an account?"
+            />
+        <TextView
+            android:labelFor="@+id/editTextPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/primary"
+            android:layout_marginStart="8dp"
+            android:text="Sign Up"
+            />
+
+    </LinearLayout>
+
+
+    </LinearLayout>
