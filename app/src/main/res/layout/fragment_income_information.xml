@@ -22,6 +22,7 @@
             >
 
             <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/radioButtonEmployed"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -32,6 +33,7 @@
                 />
 
             <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/radioButtonSelfEmployed"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -64,10 +66,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Your job title"
-                android:inputType="textEmailAddress"
                 android:padding="16dp"
+                android:inputType="text"
                 android:background="@drawable/button_round"
-                android:enabled="false"
+                android:enabled="true"
                 />
         </LinearLayout>
         <LinearLayout
@@ -87,14 +89,14 @@
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/editTextMonthlyIncome"
+                android:id="@+id/editTextIncome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Example: 1000"
-                android:inputType="textEmailAddress"
+                android:inputType="numberDecimal"
                 android:padding="16dp"
                 android:background="@drawable/button_round"
-                android:enabled="false"
+                android:enabled="true"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -103,6 +105,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_margin="8dp"
+        android:id="@+id/llOccupationCompany"
         >
         <LinearLayout
             android:layout_width="0dp"
@@ -124,10 +127,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Your profession"
-                android:inputType="textEmailAddress"
                 android:padding="16dp"
                 android:background="@drawable/button_round"
-                android:enabled="false"
+                android:enabled="true"
                 />
         </LinearLayout>
         <LinearLayout
@@ -151,18 +153,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Your work place"
-                android:inputType="textEmailAddress"
                 android:padding="16dp"
                 android:background="@drawable/button_round"
-                android:enabled="false"
+                android:enabled="true"
                 />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/llBankStatement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginStart="8dp"
+
         >
         <TextView
             android:layout_width="wrap_content"
@@ -185,7 +188,7 @@
                 android:background="@drawable/button_round"
                 android:padding="12dp"
                 android:textColor="@color/primary"
-                android:enabled="false"
+                android:enabled="true"
                 android:text="Choose file" />
 
             <TextView

@@ -3,10 +3,14 @@
     <style name="Base.Theme.Final" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/primary</item>
+        <item name="android:statusBarColor">@color/background</item>
     </style>
 
-
-
     <style name="Theme.Final" parent="Base.Theme.Final"/>
+    <style name="Theme.Final.Splash"  parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#214E87</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/img_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.Final</item>
+    </style>
 
 </resources>

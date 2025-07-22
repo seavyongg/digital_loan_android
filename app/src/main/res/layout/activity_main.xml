@@ -2,112 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/background"
-    >
+    android:background="@color/background">
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_gravity="center"
         />
-
-
-<LinearLayout
+<com.google.android.material.bottomnavigation.BottomNavigationView
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="80dp"
+    android:id="@+id/navigationView"
     android:background="@color/light"
-    android:orientation="horizontal"
-    >
-    <!--Home-->
-    <LinearLayout
-        android:id="@+id/llHome"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_home"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Home"
-            android:textSize="12sp"
-            android:textColor="@color/text_primary"
-            android:gravity="center"
-            />
-    </LinearLayout>
-    <!--Request Loans-->
-    <LinearLayout
-        android:id="@+id/llRequestLoan"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_request_loan"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Request Loan"
-            android:textSize="12sp"
-            android:textColor="@color/text_primary"
-            android:gravity="center"
-            />
-    </LinearLayout>
-    <!--Loan-->
-    <LinearLayout
-        android:id="@+id/llLoan"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_loan"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Loan"
-            android:textSize="12sp"
-            android:textColor="@color/text_primary"
-            android:gravity="center"
-            />
-    </LinearLayout>
-    <!--Profile-->
-    <LinearLayout
-        android:id="@+id/llProfile"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_profile"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profile"
-            android:textSize="12sp"
-            android:textColor="@color/text_primary"
-            android:gravity="center"
-            />
-    </LinearLayout>
+    app:menu="@menu/activity_main_bottom_menu"
+    app:labelVisibilityMode="labeled"
+    />
 
-</LinearLayout>
 </LinearLayout>

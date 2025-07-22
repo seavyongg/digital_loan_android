@@ -24,46 +24,76 @@
         android:textColor="@color/text_primary_mid"
         android:paddingBottom="60dp"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email"
-        android:labelFor="@+id/editTextEmail"
-        android:layout_marginHorizontal="8dp"
-        android:textSize="18sp"
-        />
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editTextEmail"
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+         android:orientation="vertical"
+       >
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Email"
+           android:labelFor="@+id/editTextEmail"
+           android:layout_marginHorizontal="8dp"
+           android:textSize="18sp"
+           />
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/phone_edt_layout"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center_vertical"
+           android:layout_margin="8dp"
+           app:hintEnabled="false">
+
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/editTextEmail"
+               android:layout_width="match_parent"
+               android:layout_height="60dp"
+               android:layout_marginTop="10dp"
+               android:background="@drawable/button_round"
+               android:backgroundTint="@color/background"
+               android:drawablePadding="10dp"
+               android:hint="Enter your Email"
+               android:padding="10dp"
+               android:inputType="textEmailAddress"
+               android:textColor="@color/text_primary_mid"
+               android:textSize="16sp" />
+       </com.google.android.material.textfield.TextInputLayout>
+   </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:hint="Enter your email"
-        android:inputType="textEmailAddress"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginBottom="16dp"
-        android:padding="8dp"
-        android:background="@drawable/button_round"
-        android:enabled="false"
-/>
-    <TextView
-        android:labelFor="@+id/editTextPassword"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"
-        android:layout_marginHorizontal="8dp"
-        android:textSize="18sp"
-        />
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:hint="Enter your password"
-        android:inputType="textEmailAddress"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginBottom="16dp"
-        android:padding="8dp"
-        android:background="@drawable/button_round"
-        android:enabled="false"
-        />
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:layout_marginHorizontal="8dp"
+            android:textSize="18sp"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_margin="8dp"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_round"
+                android:backgroundTint="@color/background"
+                android:drawablePadding="10dp"
+                android:hint="Enter your Password"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:textColor="@color/text_primary_mid"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
     <TextView
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"

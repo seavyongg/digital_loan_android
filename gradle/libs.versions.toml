@@ -13,7 +13,9 @@ kotlin = "1.9.22"  # Must match KSP version
 ksp = "1.9.22-1.0.17"  # Format: KotlinVersion-KSPVersion
 agp = "8.3.0"  # Android Gradle Plugin
 room = "2.6.1"  # Room version
-
+okhttp = "4.11.0"  # OkHttp version
+lifecycle = "2.6.1"
+uiAndroid = "1.8.3"  # Lifecycle version
 
 [libraries]
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
@@ -27,6 +29,7 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 
 #room component
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -35,7 +38,8 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 
-
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
