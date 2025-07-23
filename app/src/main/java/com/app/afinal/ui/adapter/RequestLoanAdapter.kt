@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.app.afinal.R
 import com.app.afinal.databinding.ListRequestLoanBinding
 import com.app.afinal.model.RequestLoanResponse
 import com.app.afinal.ui.viewHolder.RequestLoanViewHolder

@@ -22,21 +22,19 @@ class LoanRequestDetailFragment: BaseFragment<FragmentLaonRequestDetailBinding>(
     private lateinit var api: APIClient
     private lateinit var factory: RequestLoanViewModelFactory
     private lateinit var repository: RequestLoanRepository
-    private val requestLoanId = arguments?.getInt(REQUEST_LOAN_ID)
+   // private val requestLoanId = arguments?.getInt(REQUEST_LOAN_ID)
     override fun provideBinding(): FragmentLaonRequestDetailBinding {
         return FragmentLaonRequestDetailBinding.inflate(layoutInflater)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-        if (requestLoanId == null) {
-            return
-        }
-        showSkeleton()
         onBack()
+        showSkeleton()
+        val requestLoanId = arguments?.getInt(REQUEST_LOAN_ID)
         viewModel.requestLoanList.observe(viewLifecycleOwner) { response ->
             response?.let {
-                val requestLoanDetail = showProductDetail(requestLoanId)
+                val requestLoanDetail = showProductDetail(requestLoanId.toString().toInt())
                 if (requestLoanDetail != null) {
                     hideSkeleton()
                     displayRequestLoanDetails(requestLoanDetail)
@@ -67,7 +65,7 @@ class LoanRequestDetailFragment: BaseFragment<FragmentLaonRequestDetailBinding>(
         binding?.apply {
            tvRequestLoanTitle.text = "RequestLoan ${requestLoan.requestLoanId}"
             tvDateRequested.text = dateFormat(requestLoan.createdAt!!)
-            tvLoanAmount.text = requestLoan.loanAmount.toString()
+            tvLoanAmount.text = requestLoan.loanAmount
             tvLoanType.text = requestLoan.loanType
             tvDuration.text = requestLoan.loanDuration
             tvStatus.text = requestLoan.status

@@ -37,18 +37,36 @@
                 android:layout_gravity="center_vertical"
                 />
     </LinearLayout>
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayoutLoanRequests"
-        app:layout_constraintTop_toBottomOf="@id/llHeader"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/llTotalCounts"
+    <LinearLayout
+        android:id="@+id/llTotalCounts"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/llHeader"
+        >
+        <TextView
+            android:id="@+id/tvCount"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Pending: 0"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:layout_marginHorizontal="8dp"
+            />
+    </LinearLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayoutLoanRequests"
+        app:layout_constraintTop_toBottomOf="@id/llTotalCounts"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        android:background="@color/background"
+        android:background="@color/light"
         />
 
     <ProgressBar
@@ -63,32 +81,14 @@
         android:visibility="gone"
  />
 
-    <LinearLayout
-        android:id="@+id/llTotalCounts"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayoutLoanRequests"
-        >
-        <TextView
-            android:id="@+id/tvCount"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Pending: 0"
-            android:textSize="16sp"
-            android:textColor="@color/text_primary"
-            android:padding="8dp"
-            />
-    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLoanRequests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         tools:listitem="@layout/list_request_loan"
-        app:layout_constraintTop_toBottomOf="@+id/llTotalCounts"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayoutLoanRequests"
         />
 
 

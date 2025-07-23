@@ -1,6 +1,8 @@
 package com.app.afinal.service
 
 import android.content.Context
+import com.app.afinal.model.LoanDetailModel
+import com.app.afinal.model.LoanModel
 import com.app.afinal.service.intercepter.NetworkConnectionInterceptor
 import com.app.afinal.service.intercepter.TokenInterceptor
 import com.app.afinal.model.LoginModel
@@ -41,6 +43,18 @@ interface APIClient{
     //request Loan
     @GET("borrower/request-loan")
     suspend fun getRequestLoan(): Response<RequestLoanResponse>
+
+    //laon
+    @GET("borrower/loan")
+    suspend fun getAllLoan(): Response<LoanModel>
+    //loan detail
+    @GET("borrower/loan/{id}")
+    suspend fun getLoanDetail(
+        @Part("id") id: Int
+    ): Response<LoanDetailModel>
+
+
+
     companion object {
         operator fun invoke(
             context: Context,
