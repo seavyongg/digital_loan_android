@@ -7,6 +7,8 @@ import com.app.afinal.service.intercepter.NetworkConnectionInterceptor
 import com.app.afinal.service.intercepter.TokenInterceptor
 import com.app.afinal.model.LoginModel
 import com.app.afinal.model.LoginSuccessResponse
+import com.app.afinal.model.PasswordModel
+import com.app.afinal.model.ProfileModel
 import com.app.afinal.model.RequestLoanModel
 import com.app.afinal.model.RequestLoanResponse
 import com.app.afinal.model.ResponseErrorModel
@@ -19,6 +21,7 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 
 interface APIClient{
     @POST("login")
@@ -26,6 +29,27 @@ interface APIClient{
         @Body info: LoginModel
     ): Response<LoginSuccessResponse>
 
+    //profile
+    @GET("borrower/me")
+    suspend fun getProfile(): Response<ProfileModel>
+    //update profile
+    @Multipart
+    @POST("profile/update")
+    suspend fun updateProfile(
+        @Part("first_name") firstName: RequestBody,
+        @Part("last_name") lastName: RequestBody,
+        @Part("phone") phone: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("address") address: RequestBody,
+        @Part("dob") dob: RequestBody,
+        @Part profilePicture: MultipartBody.Part? = null
+    ): Response<ResponseErrorModel>
+
+    //update password
+    @POST("change-password")
+    suspend fun updatePassword(
+        @Body info: PasswordModel
+    ): Response<ResponseErrorModel>
     @Multipart
     @POST("borrower/request-loan")
     suspend fun requestLoan(
@@ -50,9 +74,8 @@ interface APIClient{
     //loan detail
     @GET("borrower/loan/{id}")
     suspend fun getLoanDetail(
-        @Part("id") id: Int
+        @Path("id") id: Int
     ): Response<LoanDetailModel>
-
 
 
     companion object {

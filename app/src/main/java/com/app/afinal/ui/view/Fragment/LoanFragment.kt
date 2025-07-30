@@ -1,11 +1,13 @@
 package com.app.afinal.ui.view.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.afinal.R
 import com.app.afinal.databinding.FragmentLoanBinding
 import com.app.afinal.model.LoanModel
 import com.app.afinal.service.APIClient
@@ -13,6 +15,7 @@ import com.app.afinal.service.intercepter.NetworkConnectionInterceptor
 import com.app.afinal.service.repository.LoanRepository
 import com.app.afinal.ui.adapter.LoanAdapter
 import com.app.afinal.ui.view.BaseFragment
+import com.app.afinal.utils.OnItemClick
 import com.app.afinal.utils.OnRequestResponse
 import com.app.afinal.utils.toastHelper
 import com.app.afinal.viewModel.LoanViewModel
@@ -60,7 +63,22 @@ class LoanFragment: BaseFragment<FragmentLoanBinding>(), OnRequestResponse {
            showLoan()
            binding?.rvLoanList?.apply {
                layoutManager = LinearLayoutManager(requireContext())
-               adapter = LoanAdapter(items)
+               adapter = LoanAdapter(items).apply {
+                   onItemClickListener = {
+                       position -> val id = items[position].loanId.toString()
+                       val intent = Bundle().apply {
+                            putString(LOAN_ID, id)
+                       }
+                       intent.let {
+                               replaceFragment(
+                                   LoanDetailFragment().apply {
+                                       arguments = it
+                                   },
+                                   R.id.fragment
+                               )
+                       }
+                   }
+               }
            }
        }
     }

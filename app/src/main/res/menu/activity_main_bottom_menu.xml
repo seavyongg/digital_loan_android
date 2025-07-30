@@ -10,10 +10,6 @@
         android:title="Request Loan"
         android:icon="@drawable/ic_request_loan" />
     <item
-        android:id="@+id/llLoanHistory"
-        android:title="History"
-        android:icon="@drawable/ic_history_loan" />
-    <item
         android:id="@+id/llLoan"
         android:title="Loan"
         android:visible="true"

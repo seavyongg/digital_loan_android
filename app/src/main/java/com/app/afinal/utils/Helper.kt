@@ -20,7 +20,7 @@ fun dateFormat(date: String): String{
         .withZone(ZoneId.of("UTC"))
 
     val timeFormatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.getDefault())
-    val fullFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault())
+    val fullFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.getDefault())
 
     try {
         //parse the input date string

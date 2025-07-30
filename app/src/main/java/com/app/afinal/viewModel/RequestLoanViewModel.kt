@@ -37,7 +37,7 @@ class RequestLoanViewModel(
         _isLoading.value = true
         Coroutine.ioThanMain(
             {
-                   try{
+                 try{
                        val response = repository.requestLoan(request)
                           Log.d("requestloanfragment", "Response: $response")
                           response
@@ -48,7 +48,7 @@ class RequestLoanViewModel(
             },
             {response ->
                 if (response != null) {
-                    _isRequestLoan.value = response
+                    response.also { _isRequestLoan.value = it }
                     _isLoading.value = false
                     listener?.success(response)
                 } else {

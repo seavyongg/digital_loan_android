@@ -2,6 +2,7 @@
 <resources>
     <color name="primary">#5063BF</color>
     <color name="primary_mid">#60214E87</color>
+    <color name="primary_small">#30214E87</color>
     <color name="light">#FFFFFF</color>
     <color name="dark">#333333</color>
     <color name="dark_mid">#50333333</color>
@@ -10,5 +11,7 @@
     <color name="text_primary">#171D1B</color>
     <color name="text_primary_mid">#80171D1B</color>
     <color name="secondary">#60FF0000</color>
-
+    <color name="warning">#FFC107</color>
+    <color name="success">#4CAF50</color>
+    <color name="edit_box">#d2e0ea</color>
 </resources>
