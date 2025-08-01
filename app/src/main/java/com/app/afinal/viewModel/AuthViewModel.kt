@@ -71,32 +71,23 @@ class AuthViewModel(
             }
         )
     }
-    private var _updateData = MutableLiveData<ProfileUpdateModel>()
-    val updateData: LiveData<ProfileUpdateModel> get() = _updateData
+    private var _updateData = MutableLiveData<ResponseErrorModel>()
+    val updateData: LiveData<ResponseErrorModel> get() = _updateData
     fun updateProfile(profileUpdateModel: ProfileUpdateModel) {
         _isLoading.value = true
-        Coroutine.ioThanMain(
-            {
-                try {
-                    var response = userRepository.updateProfile(profileUpdateModel)
-                    Log.d("AuthViewModel", "Response: ${response}")
-                    response
-                } catch (e: NoInternetException) {
-                    null
-                }
-            },
-            { response ->
+        Coroutine.main {
+            try {
+                val response = userRepository.updateProfile(profileUpdateModel)
+                _updateData.value = response
                 _isLoading.value = false
-                if (response != null) {
-                    _updateData.value = response
-                    listener?.success(response)
-                } else {
-                    _isLoading.value = false
-                    listener?.fail("Failed to update profile")
-                    Log.d("AuthViewModel", "Response: Failed to update profile")
-                }
+            }catch (e: NoInternetException) {
+                _isLoading.value = false
+                listener?.fail("No Internet Connection")
+            } catch (e: Exception) {
+                _isLoading.value = false
+                listener?.fail("Failed to update profile. Please try again.")
             }
-        )
+        }
     }
 
 }

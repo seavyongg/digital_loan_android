@@ -15,7 +15,6 @@ data class ProfileUpdateModel(
     var gender : String? = null,
     @SerializedName("address")
     var address: String? = null,
-    @SerializedName("image")
     var image: Uri? = null,
     @SerializedName("email")
     var email: String? = null,

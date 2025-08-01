@@ -14,6 +14,7 @@ import com.app.afinal.databinding.ActivityLoginBinding
 import com.app.afinal.model.LoginSuccessResponse
 import com.app.afinal.viewModel.AuthViewModel
 import android.util.Patterns
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.app.afinal.utils.OnBackResponse
 import com.app.afinal.ui.view.BaseActivity
 import com.app.afinal.ui.view.MainActivity
@@ -59,9 +60,8 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>() , OnBackResponse<Login
         networkConnectionInterceptor = NetworkConnectionInterceptor()
         mySharePreferences = MySharePreferences(applicationContext)
         api = APIClient(applicationContext, networkConnectionInterceptor)
-        userRepository = UserRepository(api, mySharePreferences)
+        userRepository = UserRepository(api, applicationContext ,mySharePreferences)
         viewModel = AuthViewModel(userRepository)
-        viewModel.listener = this
     }
 
     override fun success(message: LoginSuccessResponse) {

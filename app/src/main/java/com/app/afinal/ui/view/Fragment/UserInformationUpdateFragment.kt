@@ -7,11 +7,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.app.afinal.Application.MySharePreferences
 import com.app.afinal.R
-import com.app.afinal.databinding.FragmentInformationBinding
+import com.app.afinal.databinding.FragmentUpdateProfileBinding
+import com.app.afinal.model.LoginSuccessResponse
 import com.app.afinal.model.ProfileUpdateModel
 import com.app.afinal.service.APIClient
 import com.app.afinal.service.intercepter.NetworkConnectionInterceptor
@@ -20,30 +22,20 @@ import com.app.afinal.ui.view.BaseFragment
 import com.app.afinal.utils.OnBackResponse
 import com.app.afinal.utils.OnRequestResponse
 import com.app.afinal.utils.dateFormat
+import com.app.afinal.utils.resizeImage
 import com.app.afinal.utils.toastHelper
 import com.app.afinal.viewModel.AuthViewModel
 import com.app.afinal.viewModel.factory.UserViewModelFactory
 import com.squareup.picasso.Picasso
 
-class UserInformationUpdateFragment: BaseFragment<FragmentInformationBinding>(),
+class UserInformationUpdateFragment: BaseFragment<FragmentUpdateProfileBinding>(),
     OnBackResponse<String> , OnRequestResponse {
         private lateinit var api : APIClient
         private lateinit var networkConnectionInterceptor: NetworkConnectionInterceptor
         private lateinit var mySharePreferences: MySharePreferences
         private lateinit var repository: UserRepository
         private lateinit var viewModel: AuthViewModel
-        private var pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            result -> if( result.resultCode == Activity.RESULT_OK){
-                result.data?.data?.let { uri ->
-                    imageUrl = uri
-                    binding?.ivProfile?.setImageURI(uri)
-                    binding?.ivProfile?.let {
-                        Picasso.get().load(uri).into(it)
-                    }
-                }
-        }
-        }
-        var firstname: String? = null
+    var firstname: String? = null
     var lastname : String? = null
     var gender : String? = null
     var dateOfBirth : String? = null
@@ -53,21 +45,60 @@ class UserInformationUpdateFragment: BaseFragment<FragmentInformationBinding>(),
     var image : String? = null
     var imageUrl : Uri? = null
     private lateinit var factory: UserViewModelFactory
-    override fun provideBinding(): FragmentInformationBinding {
-        return FragmentInformationBinding.inflate(layoutInflater)
+        private var pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result -> if( result.resultCode == Activity.RESULT_OK){
+                result.data?.data?.let { uri ->
+                    imageUrl = uri
+                    binding?.ivProfile?.let {
+                        Picasso.get().load(uri).into(it)
+                    }
+                    binding?.ivProfile?.setImageURI(imageUrl)
+                }
+        }
+        }
+    override fun provideBinding(): FragmentUpdateProfileBinding {
+        return FragmentUpdateProfileBinding.inflate(layoutInflater)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+        showSkeleton()
         showUserInformation()
         showImageProfile()
         getDob()
+        submit()
+    }
+    //submit
+    private fun submit(){
         binding?.tvUpdated?.setOnClickListener {
-            getUserInformation()
+            val getUserData =  getUserInformation()
             Log.d("UserInformationUpdateFragment", "onViewCreated called ${getUserInformation()}")
             context?.toastHelper("Profile Updated Successfully")
+            viewModel.updateProfile(getUserData)
+            showDialog(
+                "Confirmation",
+                "Are you sure you want to update your profile?",
+
+            ) {
+                viewModel.listener_B = this
+                replaceFragment(
+                    ProfileFragment(),
+                    R.id.fragment
+                )
+            }
         }
+    }
+
+    //show skeleton
+    private fun showSkeleton() {
+        binding?.llProfile?.visibility = View.GONE
+        binding?.progressBar?.visibility = View.VISIBLE
+    }
+    //hide skeleton
+    private fun hideSkeleton() {
+        binding?.llProfile?.visibility = View.VISIBLE
+        binding?.progressBar?.visibility = View.GONE
     }
 
     //show image in profile
@@ -80,7 +111,7 @@ class UserInformationUpdateFragment: BaseFragment<FragmentInformationBinding>(),
     //get image from gallery
     fun getImageFromGallery() {
        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-           type = "image/png,image/jpeg,image/jpg"
+           type = "image/*"
            addCategory(Intent.CATEGORY_OPENABLE)
        }
         if(intent.resolveActivity(requireActivity().packageManager) != null) {
@@ -100,7 +131,6 @@ class UserInformationUpdateFragment: BaseFragment<FragmentInformationBinding>(),
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 { _, selectedYear, selectedMonth, selectedDay ->
-                   // binding.editTextDateOfBirth.setText("$selectedDay-${selectedMonth + 1}-$selectedYear")
                     dateOfBirth = dateFormat("$selectedDay-${selectedMonth + 1}-$selectedYear")
                     binding.editTextDateOfBirth.setText(dateOfBirth)
                 },
@@ -135,10 +165,12 @@ class UserInformationUpdateFragment: BaseFragment<FragmentInformationBinding>(),
             phone = profileData.data.phone
             address = profileData.data.profile?.address
             image = profileData.data.profile?.image
-            imageUrl = if (!image.isNullOrEmpty()) Uri.parse(image) else null
-            if (profileData != null) {
+            if (profileData == null) {
+                showSkeleton()
+            } else {
+                hideSkeleton()
                 binding?.apply {
-                   editTextFirstname.setText(firstname)
+                    editTextFirstname.setText(firstname)
                     editTextLastname.setText(lastname)
                     editTextGender.setText(gender)
                     editTextDateOfBirth.setText(dateOfBirth)
@@ -146,10 +178,9 @@ class UserInformationUpdateFragment: BaseFragment<FragmentInformationBinding>(),
                     editTextPhone.setText(phone)
                     editTextAddress.setText(address)
                     tvName.text = "${firstname} ${lastname}"
+                    tvEmail.text = email
                     Picasso.get().load(image).into(ivProfile)
                 }
-            } else {
-                context?.toastHelper("Failed to load profile data")
             }
         }
     }
@@ -158,7 +189,7 @@ class UserInformationUpdateFragment: BaseFragment<FragmentInformationBinding>(),
         networkConnectionInterceptor = NetworkConnectionInterceptor()
         api = APIClient(requireContext(),networkConnectionInterceptor)
         mySharePreferences = MySharePreferences(requireContext())
-        repository = UserRepository(api, mySharePreferences)
+        repository = UserRepository( api, requireContext(), mySharePreferences )
         factory = UserViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
       //  viewModel.getProfile()
@@ -166,16 +197,26 @@ class UserInformationUpdateFragment: BaseFragment<FragmentInformationBinding>(),
     }
     // handle back response
     override fun success(message: String) {
-        // Handle success response
+        replaceFragment(
+            ProfileFragment(),
+            R.id.fragment
+        )
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     // Handle failure response
     override fun fail(message: String) {
-        // Handle failure response
+        showDialog(
+            "Error",
+            "Failed to update profile: $message"
+        )
     }
 
     //on request response
     override fun onFailed(message: String) {
-        TODO("Not yet implemented")
+        showDialog(
+            "Error",
+            "Failed to update profile: $message"
+        )
     }
 }

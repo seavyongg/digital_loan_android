@@ -110,7 +110,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), OnRequestRespons
         networkConnectionInterceptor = NetworkConnectionInterceptor()
         api = APIClient(requireContext(), networkConnectionInterceptor)
         mySharePreferences = MySharePreferences(requireContext())
-        repository = UserRepository(api, mySharePreferences)
+        repository = UserRepository(api,requireContext(), mySharePreferences)
         factory = UserViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java)
         viewModel.getProfile()

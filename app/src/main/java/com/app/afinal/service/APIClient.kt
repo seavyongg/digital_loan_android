@@ -38,11 +38,12 @@ interface APIClient{
     suspend fun updateProfile(
         @Part("first_name") firstName: RequestBody,
         @Part("last_name") lastName: RequestBody,
+        @Part("gender") gender: RequestBody,
         @Part("phone") phone: RequestBody,
         @Part("email") email: RequestBody,
         @Part("address") address: RequestBody,
         @Part("dob") dob: RequestBody,
-        @Part profilePicture: MultipartBody.Part? = null
+        @Part image: MultipartBody.Part? = null
     ): Response<ResponseErrorModel>
 
     //update password

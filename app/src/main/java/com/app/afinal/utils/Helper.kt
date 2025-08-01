@@ -1,14 +1,17 @@
 package com.app.afinal.utils
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Message
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import okhttp3.RequestBody
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeFormatter.ofPattern
+
 import java.util.Locale
 
 fun Context.toastHelper(message: String){
@@ -42,4 +45,18 @@ fun dateFormat(date: String): String{
         e.printStackTrace()
         return date
     }
+}
+fun resizeImage(context: Context, uri: Uri, maxWidth: Int, maxHeight: Int): Bitmap? {
+    val inputStream =  context.contentResolver.openInputStream(uri) ?: return null
+    val originalBitmap = BitmapFactory.decodeStream(inputStream)
+
+    val scale = minOf(
+        maxWidth.toFloat() / originalBitmap.width,
+        maxHeight.toFloat() / originalBitmap.height
+    )
+
+    val newWidth = (originalBitmap.width * scale).toInt()
+    val newHeight = (originalBitmap.height * scale).toInt()
+
+    return Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true)
 }
